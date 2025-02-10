@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina ta</title>
+    <style>
+        body {
+            background-color: #f5c1e4; /* Fundal roz */
+            text-align: center;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        .gif-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+        .gif-container img {
+            width: 100%;
+            height: auto;
+        }
+        .button-container {
+            position: relative;
+            margin-top: 20px;
+            width: 300px; /* Dimensiunea zonei în care butonul „NU” se va mișca */
+            height: 100px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+            width: 120px;
+            position: absolute;
+        }
+        .button-green {
+            background-color: green;
+            color: white;
+            left: 10%;
+        }
+        .button-red {
+            background-color: red;
+            color: white;
+            left: 60%;
+        }
+        .love-text {
+            font-size: 28px;
+            margin-top: 20px;
+            color: black;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Întrebarea -->
+        <h1>Esti libera pe 14?</h1>
+
+        <!-- GIF cu inima roșie -->
+        <div class="gif-container">
+            <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExenZxMXFoMmo0NGhoOHN1aGs5bWh1MDQzcGFzNnh6bnkzZmFpeG0waiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/M0olFwEPN7Ia1hkJK2/giphy.gif" alt="Inimă roșie" />
+        </div>
+
+        <!-- Butoane DA și NU -->
+        <div class="button-container">
+            <button class="button-green" id="yesButton">DA</button>
+            <button class="button-red" id="noButton">NU</button>
+        </div>
+    </div>
+
+    <script>
+        // Când apăs pe "DA", totul dispare și apare GIF-ul cu foca + textul "LOVE GIGI"
+        document.getElementById('yesButton').addEventListener('click', function() {
+            document.querySelector('.container').innerHTML = ''; // Șterge conținutul
+            var newGif = document.createElement('img');
+            newGif.src = 'https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2Y3NTdkZjN6ZjFwdTYxenVxNmF2eGNxZGFjZHd5OWkxOWFwNGwzcyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qt7bBGJ8x7ZRu/giphy.gif'; 
+            newGif.alt = 'Nou GIF';
+            newGif.style.width = '400px';
+            document.body.appendChild(newGif);
+            
+            // Adaugă textul "LOVE GIGI"
+            var loveText = document.createElement('div');
+            loveText.className = 'love-text';
+            loveText.innerText = 'LOVE GIGI';
+            document.body.appendChild(loveText);
+        });
+
+        // Când apăs pe "NU", butonul "NU" se mută într-o zonă aleatorie în jurul GIF-ului
+        document.getElementById('noButton').addEventListener('click', function() {
+            var noButton = document.getElementById('noButton');
+            var container = document.querySelector('.gif-container');
+
+            var maxX = container.offsetWidth - noButton.offsetWidth;
+            var maxY = container.offsetHeight - noButton.offsetHeight;
+
+            var randomX = Math.random() * maxX;
+            var randomY = Math.random() * maxY;
+
+            noButton.style.left = container.offsetLeft + randomX + 'px';
+            noButton.style.top = container.offsetTop + randomY + 'px';
+        });
+    </script>
+
+</body>
+</html>
